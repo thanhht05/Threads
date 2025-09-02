@@ -12,11 +12,10 @@ from golike_api import complete_job, skip_job
 def main():
     cookie = input("Nhập cookie: ")
     n = int(input("Nhập số lần muốn chạy: "))
-
+    cnt = 0
     price = 0
-    time_success = 0
-    for i in range(1, n + 1):
-        print(f"\n=== Lần {i}/{n} ===")
+    while cnt < n:
+
         job_data = get_latest_job()
         if not job_data:
             print("[-] Không có job để thực hiện, chờ 5 giây...")
@@ -34,7 +33,7 @@ def main():
             if complete_job(job_data):
                 price += job_data["price_after_cost"]
                 print(f"{BLUE}[+] Total price: {price}{RESET}")
-                time_success += 1
+                cnt += 1
             else:
                 print(f"{RED}[!] complete_job thất bại, gửi report...")
                 skip_job(job_data)
@@ -42,7 +41,7 @@ def main():
             print(f"{RED}[!] Job bị lỗi!{RESET}")
             skip_job(job_data)
 
-        print(f"{GREEN}[+] Hoàn tất lần {time_success} / {n}{RESET}")
+        print(f"{GREEN}[+] Hoàn tất lần {cnt} / {n}{RESET}")
         print(f"[*] Đợi 5 giây trước khi job tiếp theo...", end="", flush=True)
         for j in range(10):
             print(".", end="", flush=True)

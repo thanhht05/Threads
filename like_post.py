@@ -1,3 +1,4 @@
+import time
 import requests
 
 from headers import get_headers
@@ -23,7 +24,11 @@ def like(cookie: str, job_data):
         "server_timestamps": "true",
         "doc_id": "9558134877619484",
     }
-
+    print("Sau 5s sẽ like")
+    for j in range(5):
+        print(".", end="", flush=True)
+        time.sleep(1)
+    print()
     response = requests.post(
         "https://www.threads.com/api/graphql",
         headers=headers,

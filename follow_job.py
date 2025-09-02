@@ -1,3 +1,4 @@
+import time
 import requests
 from headers import get_headers
 from utils import get_user_id, get_data
@@ -18,7 +19,11 @@ def follow(cookie, job_data):
         "server_timestamps": "true",
         "doc_id": "24213450504960197",
     }
-
+    print("Sau 5s sẽ follow")
+    for j in range(5):
+        print(".", end="", flush=True)
+        time.sleep(1)
+    print()
     response = requests.post(
         "https://www.threads.com/graphql/query",
         headers=headers,
